@@ -22,17 +22,18 @@ CREATE TABLE IF NOT EXISTS user_info (
     last_name       VARCHAR(32)     NOT NULL,
     username        VARCHAR(32)     NOT NULL,
     email           VARCHAR(320)    NOT NULL,
+    comment         VARCHAR(256)    NOT NULL,
     PRIMARY KEY (entry_id)
 );
 CREATE TABLE IF NOT EXISTS login_info (
     entry_id        SMALLINT(5)     NOT NULL,
     password        VARCHAR(128)    NOT NULL,
-    comment         VARCHAR(256)    NOT NULL,
     creation_time   TIMESTAMP       NOT NULL,
     PRIMARY KEY (entry_id)
 );
 
 --Setting up the website table.
+
 INSERT INTO website VALUES (1, "Blackboard", "https://blackboard.hartford.edu/");
 INSERT INTO website VALUES (2, "Hawkmail","https://outlook.office.com/");
 INSERT INTO website VALUES (3, "Wordpress", "http://wordpress.com/");
@@ -41,8 +42,29 @@ INSERT INTO website VALUES (5, "Discord", "http://discord.com/");
 INSERT INTO website VALUES (6, "Epic Games", "http://store.epicgames.com/");
 INSERT INTO website VALUES (7, "Instacart", "http://www.instacart.com/");
 INSERT INTO website VALUES (8, "Uber", "http://www.uber.com/");
-INSERT INTO website VALUES (9, "New York Times", "http://www.nytimes.com/");
-INSERT INTO website VALUES (10, "Khan Academy", "http://www.khanacademy.org/")
+INSERT INTO website VALUES (9, "The Washington Post", "http://www.washingtonpost.com/");
+INSERT INTO website VALUES (10, "Khan Academy", "http://www.khanacademy.org/");
 
+--Setting up the user_info table.
+
+INSERT INTO user_info VALUES (1, "Alex", "Cooke-Politikos", "cookepoli", "cookepoli@hartford.edu", "Use this for school things.");
+INSERT INTO user_info VALUES (2, "Alex", "Cooke-Politikos", "cookepoli", "cookepoli@hartford.edu", "School email.");
+INSERT INTO user_info VALUES (3, "John", "Smith", "jsmith17", "johnnys@gmail.com", "Personal website.");
+INSERT INTO user_info VALUES (4, "John", "Smith", "johnnys", "johnnys@gmail.com", "Personal email.");
+INSERT INTO user_info VALUES (5, "Dylan", "Falco", "dfalcon72", "dylan.falco@msn.net", "Used for gaming.");
+INSERT INTO user_info VALUES (6, "Alex", "Cooke-Politikos", "cookiepolitics", "cookepoli@hartford.edu", "Game library.");
+INSERT INTO user_info VALUES (7, "George", "Washington", "gwashington", "george.washington@uswh.gov", "Deliver groceries to the White House.");
+INSERT INTO user_info VALUES (8, "Lewis", "Hamilton", "lh44", "7timewdc@gmail.com", "Got to drive fast.");
+INSERT INTO user_info VALUES (9, "Will", "Lewis", "willlewisceo", "will.lewis@washingtonpost.com", "The only news outlet.");
+INSERT INTO user_info VALUES (10, "Timmy", "Smith", "tsmith18", "timmys@gmail.com", "Math help website.");
+
+--Setting up the login_info table.
+
+INSERT INTO login_info
+VALUES (
+    1,
+    AES_ENCRPYT("iloveuhart", @key_str, @init_vector),
+    '2019-09-01 12:00:00'
+);
 
 --source commands.sql
