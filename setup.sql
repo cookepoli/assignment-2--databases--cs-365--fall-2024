@@ -60,11 +60,15 @@ INSERT INTO user_info VALUES (10, "Timmy", "Smith", "tsmith18", "timmys@gmail.co
 
 --Setting up the login_info table.
 
-INSERT INTO login_info
-VALUES (
-    1,
-    AES_ENCRPYT("iloveuhart", @key_str, @init_vector),
-    '2019-09-01 12:00:00'
-);
+INSERT INTO login_info VALUES (1, AES_ENCRPYT("iloveuhart", @key_str, @init_vector), '2019-09-01 12:00:00');
+INSERT INTO login_info VALUES (2, AES_ENCRYPT("iloveuhart", @key_str, @init_vector), '2019-09-01 12:00:00');
+INSERT INTO login_info VALUES (3, AES_ENCRYPT("password", @key_str, @init_vector), '2020-08-21 13:21:56');
+INSERT INTO login_info VALUES (4, AES_ENCRYPT("aBcD1234", @key_str, @init_vector), '2010-02-15 08:52:34');
+INSERT INTO login_info VALUES (5, AES_ENCRYPT("iL0V3Uh4r7", @key_str, @init_vector), '2017-05-27 18:42:30');
+INSERT INTO login_info VALUES (6, AES_ENCRYPT("physics2024", @key_str, @init_vector), '2021-07-17 21:00:17');
+INSERT INTO login_info VALUES (7, AES_ENCRYPT("f1rs7pr3s1d3n71776@", @key_str, @init_vector), '1776-07-04 07:00:00');
+INSERT INTO login_info VALUES (8, AES_ENCRYPT("fastdriver1985", @key_str, @init_vector), '2022-12-11 03:40:21');
+INSERT INTO login_info VALUES (9, AES_ENCRYPT("wapo2133124", @key_str, @init_vector), '2023-11-05 06:57:00');
+INSERT INTO login_info VALUES (10, AES_ENCRYPT("tsmithm4th", @key_str, @init_vector), '2024-10-01 11:57:56');
 
 --source commands.sql
