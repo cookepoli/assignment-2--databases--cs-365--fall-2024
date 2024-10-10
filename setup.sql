@@ -5,7 +5,7 @@ CREATE DATABASE `passwords` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 USE passwords;
 
 SET block_encryption_mode = 'aes-256-cbc';
-SET @key_str = UNHEX(SHA2('my secret passphrase', 512));
+SET @key_str = UNHEX(SHA2('iloveCS365', 512));
 SET @init_vector = RANDOM_BYTES(16);
 
 CREATE TABLE IF NOT EXISTS website (
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS website (
     PRIMARY KEY (entry_id)
 );
 CREATE TABLE IF NOT EXISTS user_info (
-    entry_id        SMALLINT(5)
+    entry_id        SMALLINT(5),
     first_name      VARCHAR(32)     NOT NULL,
     last_name       VARCHAR(32)     NOT NULL,
     username        VARCHAR(32)     NOT NULL,
@@ -25,12 +25,10 @@ CREATE TABLE IF NOT EXISTS user_info (
 );
 CREATE TABLE IF NOT EXISTS login_info (
     entry_id        SMALLINT(5)     NOT NULL,
-    password        VARCHAR(128)    NOT NULL,
-    creation_time   TIMESTAMP       NOT NULL,
+    password        VARBINARY(512)    NOT NULL,
+    creation_time   DATETIME      NOT NULL,
     PRIMARY KEY (entry_id)
 );
-
---Setting up the website table.
 
 INSERT INTO website VALUES (1, "Blackboard", "https://blackboard.hartford.edu/");
 INSERT INTO website VALUES (2, "Hawkmail","https://outlook.office.com/");
@@ -43,8 +41,6 @@ INSERT INTO website VALUES (8, "Uber", "http://www.uber.com/");
 INSERT INTO website VALUES (9, "The Washington Post", "http://www.washingtonpost.com/");
 INSERT INTO website VALUES (10, "Khan Academy", "http://www.khanacademy.org/");
 
---Setting up the user_info table.
-
 INSERT INTO user_info VALUES (1, "Alex", "Cooke-Politikos", "cookepoli", "cookepoli@hartford.edu", "Use this for school things.");
 INSERT INTO user_info VALUES (2, "Alex", "Cooke-Politikos", "cookepoli", "cookepoli@hartford.edu", "School email.");
 INSERT INTO user_info VALUES (3, "John", "Smith", "jsmith17", "johnnys@gmail.com", "Personal website.");
@@ -56,9 +52,7 @@ INSERT INTO user_info VALUES (8, "Lewis", "Hamilton", "lh44", "7timewdc@gmail.co
 INSERT INTO user_info VALUES (9, "Will", "Lewis", "willlewisceo", "will.lewis@washingtonpost.com", "The only news outlet.");
 INSERT INTO user_info VALUES (10, "Timmy", "Smith", "tsmith18", "timmys@gmail.com", "Math help website.");
 
---Setting up the login_info table.
-
-INSERT INTO login_info VALUES (1, AES_ENCRPYT("iloveuhart", @key_str, @init_vector), '2019-09-01 12:00:00');
+INSERT INTO login_info VALUES (1, AES_ENCRYPT("iloveuhart", @key_str, @init_vector), '2019-09-01 12:00:00');
 INSERT INTO login_info VALUES (2, AES_ENCRYPT("iloveuhart", @key_str, @init_vector), '2019-09-01 12:00:00');
 INSERT INTO login_info VALUES (3, AES_ENCRYPT("password", @key_str, @init_vector), '2020-08-21 13:21:56');
 INSERT INTO login_info VALUES (4, AES_ENCRYPT("aBcD1234", @key_str, @init_vector), '2010-02-15 08:52:34');
@@ -68,5 +62,3 @@ INSERT INTO login_info VALUES (7, AES_ENCRYPT("f1rs7pr3s1d3n71776@", @key_str, @
 INSERT INTO login_info VALUES (8, AES_ENCRYPT("fastdriver1985", @key_str, @init_vector), '2022-12-11 03:40:21');
 INSERT INTO login_info VALUES (9, AES_ENCRYPT("wapo2133124", @key_str, @init_vector), '2023-11-05 06:57:00');
 INSERT INTO login_info VALUES (10, AES_ENCRYPT("tsmithm4th", @key_str, @init_vector), '2024-10-01 11:57:56');
-
---source commands.sql
