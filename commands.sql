@@ -5,8 +5,15 @@ INSERT INTO login_info VALUES (11,  "jsmith19", AES_ENCRYPT("l0v32sh0p", @key_st
 
 --cmd 2
 SELECT CAST(AES_DECRYPT(password, @key_str, @init_vector) AS CHAR) FROM login_info WHERE entry_id = (SELECT entry_id FROM website WHERE website_url = "http://www.uber.com/");
+SELECT CAST(AES_DECRYPT(password, @key_str, @init_vector) AS CHAR) FROM login_info JOIN website USING (entry_id) WHERE website_url = "http://www.uber.com/";
 
 --cmd 3
-SELECT username,password,creation_time from login_info JOIN website USING (entry_id) WHERE website_url LIKE "https%";
+SELECT username,password,creation_time FROM login_info JOIN website USING (entry_id) WHERE website_url LIKE "https%";
 
 --cmd 4
+UPDATE website INNER JOIN login_info ON (website.entry_id = login_info.entry_id) SET website_url = "https://www.doordash.com/" WHERE CAST(AES_DECRYPT(password, @key_str, @init_vector) AS CHAR) = "fastdriver1985";
+
+--cmd 5
+UPDATE login_info SET password = AES_ENCRYPT("howi3theh4wk", @key_str, @init_vector) WHERE entry_id = 1;
+
+UPDATE login_info SET password = AES_ENCRYPT("howi3theh4wk", @key_str, @init_vector) WHERE CAST(AES_DECRYPT(password, @key_str, @init_vector) AS CHAR) = "physics2024";
