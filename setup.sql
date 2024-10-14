@@ -25,21 +25,23 @@ CREATE TABLE IF NOT EXISTS user_info (
 CREATE TABLE IF NOT EXISTS login_info (
     entry_id        SMALLINT(5)     NOT NULL,
     username        VARCHAR(32)     NOT NULL,
-    password        VARBINARY(512)    NOT NULL,
-    creation_time   DATETIME      NOT NULL,
+    password        VARBINARY(512)  NOT NULL,
+    creation_time   DATETIME        NOT NULL,
     PRIMARY KEY (entry_id)
 );
 
-INSERT INTO website VALUES (1, "Blackboard", "https://blackboard.hartford.edu/");
-INSERT INTO website VALUES (2, "Hawkmail","https://outlook.office.com/");
-INSERT INTO website VALUES (3, "Wordpress", "http://wordpress.com/");
-INSERT INTO website VALUES (4, "GMail", "https://mail.google.com/");
-INSERT INTO website VALUES (5, "Discord", "http://discord.com/");
-INSERT INTO website VALUES (6, "Epic Games", "http://store.epicgames.com/");
-INSERT INTO website VALUES (7, "Instacart", "http://www.instacart.com/");
-INSERT INTO website VALUES (8, "Uber", "http://www.uber.com/");
-INSERT INTO website VALUES (9, "The Washington Post", "http://www.washingtonpost.com/");
-INSERT INTO website VALUES (10, "Khan Academy", "http://www.khanacademy.org/");
+INSERT INTO website
+VALUES
+  (1, "Blackboard", "https://blackboard.hartford.edu/"),
+  (2, "Hawkmail","https://outlook.office.com/"),
+  (3, "Wordpress", "http://wordpress.com/"),
+  (4, "GMail", "https://mail.google.com/"),
+  (5, "Discord", "http://discord.com/"),
+  (6, "Epic Games", "http://store.epicgames.com/"),
+  (7, "Instacart", "http://www.instacart.com/"),
+  (8, "Uber", "http://www.uber.com/"),
+  (9, "The Washington Post", "http://www.washingtonpost.com/"),
+  (10, "Khan Academy", "http://www.khanacademy.org/");
 
 INSERT INTO user_info VALUES (1, "Alex", "Cooke-Politikos", "cookepoli@hartford.edu", "Use this for school things.");
 INSERT INTO user_info VALUES (2, "Alex", "Cooke-Politikos",  "cookepoli@hartford.edu", "School email.");
