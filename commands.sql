@@ -15,5 +15,10 @@ UPDATE website INNER JOIN login_info ON (website.entry_id = login_info.entry_id)
 
 --cmd 5
 UPDATE login_info SET password = AES_ENCRYPT("howi3theh4wk", @key_str, @init_vector) WHERE entry_id = 1;
-
 UPDATE login_info SET password = AES_ENCRYPT("howi3theh4wk", @key_str, @init_vector) WHERE CAST(AES_DECRYPT(password, @key_str, @init_vector) AS CHAR) = "physics2024";
+
+--cmd 6
+DELETE FROM user_info, login_info, website USING user_info, login_info, website WHERE website.entry_id = (SELECT * FROM (SELECT entry_id FROM website WHERE website_url = "http://uber.com/")temp) AND user_info.entry_id = login_info.entry_id AND login_info.entry_id = website.entry_id AND user_info.entry_id = website.entry_id;
+
+--cmd 7
+DELETE FROM user_info, login_info, website USING user_info, login_info, website WHERE login_info.entry_id = (SELECT * FROM (SELECT entry_id FROM website WHERE CAST(AES_DECRYPT(password, @key_str, @init_vector) AS CHAR) = "wapo2133124")temp) AND user_info.entry_id = login_info.entry_id AND login_info.entry_id = website.entry_id AND user_info.entry_id = website.entry_id;
