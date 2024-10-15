@@ -1,14 +1,13 @@
 --cmd 1
 INSERT INTO user_info
 VALUES
-  (11, "James", "Smith", "jsmith@hotmail.com", "Online shopping.");
+  (0, "James", "Smith", "jsmith@hotmail.com", "Online shopping.");
 INSERT INTO website
 VALUES
-  (11, "Amazon", "https://www.amazon.com/");
+  (0, "Amazon", "https://www.amazon.com/");
 INSERT INTO login_info
 VALUES
-  (11,  "jsmith19", AES_ENCRYPT("l0v32sh0p", @key_str, @init_vector), '10-10-21 14:05:24');
---Use autoincrement
+  (0,  "jsmith19", AES_ENCRYPT("l0v32sh0p", @key_str, @init_vector), '10-10-21 14:05:24');
 
 --cmd 2
 SELECT CAST(AES_DECRYPT(password, @key_str, @init_vector) AS CHAR)
@@ -41,10 +40,12 @@ SET website_url = "https://www.doordash.com/"
 WHERE CAST(AES_DECRYPT(password, @key_str, @init_vector) AS CHAR) = "fastdriver1985";
 
 
---cmd 5
+--cmd 5.1 Update password given an entry id.
 UPDATE login_info
 SET password = AES_ENCRYPT("howi3theh4wk", @key_str, @init_vector)
 WHERE entry_id = 1;
+
+--cmd 5.2 Update a password given the password to be changed.
 
 UPDATE login_info
 SET password = AES_ENCRYPT("howi3theh4wk", @key_str, @init_vector)
