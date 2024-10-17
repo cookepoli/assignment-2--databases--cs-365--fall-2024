@@ -12,20 +12,12 @@ VALUES
 --cmd 2
 SELECT CAST(AES_DECRYPT(password, @key_str, @init_vector) AS CHAR)
 FROM login_info
-WHERE entry_id = (
-  SELECT entry_id
-  FROM website
-  WHERE website_url = "http://www.uber.com/"
-);
-
-SELECT CAST(AES_DECRYPT(password, @key_str, @init_vector) AS CHAR)
-FROM login_info
 JOIN website
 USING (entry_id)
 WHERE website_url = "http://www.uber.com/";
 
 --cmd 3
-SELECT username,password,creation_time
+SELECT entry_id, username, password, creation_time
 FROM login_info
 JOIN website
 USING (entry_id)
@@ -39,6 +31,9 @@ ON (website.entry_id = login_info.entry_id)
 SET website_url = "https://www.doordash.com/"
 WHERE CAST(AES_DECRYPT(password, @key_str, @init_vector) AS CHAR) = "fastdriver1985";
 
+--Note for Command 5: It was not specified in the instructions what information to use to identify the password to
+--be changed. I chose to write two possible commands, one using just the entry_id as a key, and the other
+--using the password to be changed. Both work as expected.
 
 --cmd 5.1 Update password given an entry id.
 UPDATE login_info
